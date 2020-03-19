@@ -1,0 +1,7 @@
+int32 COMMAND_CAPTURE = 1
+int32 COMMAND_CALIBRATE = 2
+
+int32 command
+---
+bool success
+string message
