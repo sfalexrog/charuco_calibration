@@ -9,7 +9,8 @@
         <param name="camera_name" value="main_camera"/>
     </node>
 
-    <node pkg="charuco_calibration" name="charuco_calibration" type="calibrate_camera_ros_services" output="screen">
+    <!-- <node pkg="charuco_calibration" name="charuco_calibration" type="calibrate_camera_ros_services" output="screen"> -->
+    <node pkg="nodelet" type="nodelet" name="charuco_calibration" args="load charuco_calibration/CalibrationServices nodelet_manager" output="screen">
         <!-- Image source. The node subscribes to image topic, remap your topic to it -->
         <remap from="image" to="cv_camera/image_raw"/>
         <!-- SetCameraInfo service. Remap your service to it -->

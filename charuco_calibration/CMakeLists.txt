@@ -11,8 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
   roscpp
-  std_srvs
+  sensor_msgs
   message_generation
+  nodelet
 )
 
 ## System dependencies are found with CMake's conventions
@@ -149,6 +150,8 @@ target_include_directories(calibrator PUBLIC
   ${OpenCV_INCLUDE_DIRS}
 )
 
+set_target_properties(calibrator PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -173,11 +176,11 @@ target_link_libraries(calibrate_camera_from_files PRIVATE
   calibrator
 )
 
-add_executable(calibrate_camera_ros_services
+add_library(charuco_calibration SHARED
   src/calibrate_camera_ros_services.cpp
 )
 
-target_link_libraries(calibrate_camera_ros_services PRIVATE
+target_link_libraries(charuco_calibration PRIVATE
   calibrator
 )
 
@@ -191,7 +194,7 @@ target_link_libraries(calibrate_camera_ros_services PRIVATE
 ## same as for the library above
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(calibrate_camera_from_files ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(calibrate_camera_ros_services ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(charuco_calibration ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node PRIVATE
@@ -204,7 +207,7 @@ target_link_libraries(calibrate_camera_from_files PRIVATE
   ${OpenCV_LIBRARIES}
 )
 
-target_link_libraries(calibrate_camera_ros_services PRIVATE
+target_link_libraries(charuco_calibration PRIVATE
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )

@@ -43,7 +43,7 @@ struct CalibratorParams
 struct CalibratorDetectionResult
 {
     /** Source image */
-    const cv::Mat sourceImage;
+    cv::Mat sourceImage;
     /** IDs of detected markers */
     std::vector<int> ids;
     /** Detected marker corners */
@@ -55,6 +55,7 @@ struct CalibratorDetectionResult
     /** Check whether this is a valid result for calibration */
     bool isValid() const { return ids.size() > 0 && corners.size() > 0; }
     CalibratorDetectionResult(const cv::Mat& sourceImage) : sourceImage(sourceImage), ids(), corners() {}
+    CalibratorDetectionResult() : sourceImage(), ids(), corners() {}
 };
 
 /** Camera calibration result */

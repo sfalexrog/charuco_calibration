@@ -1,0 +1,7 @@
+<library path="lib/libcharuco_calibration">
+  <class name="charuco_calibration/CalibrationServices" type="charuco_calibration::CalibrationServices" base_class_type="nodelet::Nodelet">
+    <description>
+      ChArUco calibration nodelet with service-based controls.
+    </description>
+  </class>
+</library>
