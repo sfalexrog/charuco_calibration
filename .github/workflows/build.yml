@@ -16,7 +16,8 @@ jobs:
       image: ros:${{ matrix.ros_distribution }}
     steps:
       - uses: actions/checkout@v2
-        path: 'src'
+        with:
+          path: 'src'
       - name: Install dependencies
         run: |
           apt update
