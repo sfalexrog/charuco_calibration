@@ -24,4 +24,6 @@ jobs:
           rosdep update
           rosdep install --from-paths src --ignore-src -y
       - name: Build package
-        run: catkin_make
+        run: |
+          source /opt/ros/${{ matrix.ros_distribution }}/setup.bash
+          catkin_make
