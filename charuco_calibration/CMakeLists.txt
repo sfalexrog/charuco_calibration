@@ -15,8 +15,15 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+# Workaround for OpenCV 3/4 support
+set(_opencv_version 4)
+find_package(OpenCV ${_opencv_version} QUIET COMPONENTS aruco calib3d core imgproc highgui)
+if (NOT OpenCV_FOUND)
+  message(STATUS "Did not find OpenCV 4, searching for OpenCV 3")
+  set(_opencv_version 3)
+endif()
 
-find_package(OpenCV 3 REQUIRED COMPONENTS
+find_package(OpenCV ${_opencv_version} REQUIRED COMPONENTS
   aruco
   calib3d
   core

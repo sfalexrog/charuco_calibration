@@ -196,7 +196,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    cvDestroyWindow("out");
+    cv::destroyWindow("out");
 
     std::cout << "Calibrating..." << std::endl;
 
