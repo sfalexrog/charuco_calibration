@@ -1,0 +1,25 @@
+name: Test build
+
+on:
+  [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ros_distribution:
+          - kinetic
+          - melodic
+          - noetic
+    container:
+      image: ros:${{ matrix.ros_distribution }}
+    steps:
+      - uses: actions/checkout@v2
+        path: 'src'
+      - name: Install dependencies
+        run: |
+          apt update
+          rosdep install --from-paths src --ignore-src -y
+      - name: Build package
+        run: catkin_make
